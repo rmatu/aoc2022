@@ -4,7 +4,15 @@ import { join } from 'path'
 const convertToNumberRange = (range: string) => {
   const [start, end] = range.split('-')
 
-  return [Number(start), Number(end)]
+  return fillArrayWithIntegers(Number(start), Number(end))
+}
+
+const fillArrayWithIntegers = (start: number, end: number): number[] => {
+  const result: number[] = []
+  for (let i = start; i <= end; i++) {
+    result.push(i)
+  }
+  return result
 }
 
 export const main = async () => {
@@ -15,12 +23,12 @@ export const main = async () => {
   lines.forEach((line) => {
     const [firstRange, secondRange] = line.split(',')
 
-    const [a1, b1] = convertToNumberRange(firstRange)
-    const [a2, b2] = convertToNumberRange(secondRange)
+    const firstArr = convertToNumberRange(firstRange)
+    const secondArr = convertToNumberRange(secondRange)
 
-    if (a2 >= a1 && b2 <= b1) {
-      points++
-    } else if (a1 >= a2 && b1 <= b2) {
+    const isOverlapping = firstArr.find((el) => secondArr.includes(el))
+
+    if (isOverlapping) {
       points++
     }
   })
