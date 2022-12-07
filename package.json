@@ -6,7 +6,7 @@
   "scripts": {
     "build-dev": "npm run build &&  node dist/${day}/index.js",
     "watch:serve": "nodemon --ext ts --exec \"npm run build-dev\"",
-    "build": "swc --copy-files src -d dist",
+    "build": "npm run clean && swc --copy-files src -d dist",
     "dev": "nodemon -e ts -w ./src -x npm run watch:serve",
     "clean": "rm -rf dist"
   },
