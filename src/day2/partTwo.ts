@@ -34,10 +34,7 @@ const toLose = {
   C: 'B',
 }
 
-const executeStrategy = (
-  firstUserInput: GameElementPoint,
-  gameStrategy: StrategyGuide,
-) => {
+const executeStrategy = (firstUserInput: GameElementPoint, gameStrategy: StrategyGuide) => {
   if (gameStrategy === 'Z') {
     return gameElementPoints[toWin[firstUserInput]]
   }
@@ -58,13 +55,10 @@ export const main = async () => {
   let points = 0
 
   fileResult.split('\n').forEach((round) => {
-    const [firstUserInput, secondUserInput] = round.split(' ')
+    const [firstUserInput, secondUserInput] = round.split(' ') as [GameElementPoint, StrategyGuide]
     const pointsForStrategy = strategyGuide[secondUserInput]
 
-    const pointsForElement = executeStrategy(
-      firstUserInput as GameElementPoint,
-      secondUserInput as StrategyGuide,
-    )
+    const pointsForElement = executeStrategy(firstUserInput, secondUserInput)
 
     points += pointsForStrategy + pointsForElement
   })
